@@ -1,6 +1,6 @@
 from typing import List
 
-from core.models.Shipment_step import Shipment_step
+from src.core.schemas.Shipment_step import Shipment_step
 
 
 class Shipment:
