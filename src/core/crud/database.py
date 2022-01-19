@@ -1,16 +1,16 @@
 import motor.motor_asyncio
 
-MONGO_DETAILS = "mongodb://localhost:27017"
+from src.core.env import settings
 
-client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
+client = motor.motor_asyncio.AsyncIOMotorClient(settings.db_url)
 
 database = client.jobs
 
 jobs_collection = database.get_collection("jobs_collection")
+routes_collection = database.get_collection("routes_collection")
 
 
 # helpers
-
 
 def job_helper(job) -> dict:
     return {
@@ -20,4 +20,13 @@ def job_helper(job) -> dict:
         "location": job["location"],
         "skills": job["skills"],
         "time_windows": job["time_windows"],
+    }
+
+
+def route_helper(route) -> dict:
+    return {
+        "id": str(route["_id"]),
+        "paquerId": route["paquerId"],
+        "geojson": route["geojson"],
+        "packages": route["packages"]
     }
