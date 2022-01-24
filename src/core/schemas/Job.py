@@ -53,7 +53,6 @@ class JobResponse(BaseModel):
         self.message: message
 
 
-
 def response_model(data, message):
     return {
         "data": [data],
