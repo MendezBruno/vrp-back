@@ -19,21 +19,21 @@ from pydantic import BaseModel, Field
 class OrsmRequest(BaseModel):
     profile: str = Field("driving", description='Route is transited by profile type')
     coordinates: List[Any] = Field(..., description='The coordinates calculate routes for.')
-    alternatives: str = Field("false", description='Search for alternative routes. Passing a number alternatives=n searches for up to n alternative routes.')
+    alternatives: str = Field("2", description='Search for alternative routes. Passing a number alternatives=n searches for up to n alternative routes.')
     steps: str = Field("false", description='Returned route steps for each route leg')
     geometry: str = Field("geojson", description='Returned route geometry format (influences overview and per step)')
     overview: str = Field("simplified", description='Add overview geometry either full, simplified according to highest zoom level it could be display on, or not at all.')
     annotation: str = Field("false", description='Returns additional metadata for each coordinate along the route geometry.')
 
-    def __init__(self, profile: str, coordinates: List[Any], alternatives: str, steps: str, geometry: str, overview: str, annotation: str, **data: Any) -> None:
-        super().__init__(**data)
-        self.profile = profile
-        self.coordinates = coordinates
-        self.alternatives = alternatives
-        self.steps = steps
-        self.geometry = geometry
-        self.overview = overview
-        self.annotation = annotation
+    # def __init__(self, profile: str, coordinates: List[Any], alternatives: str, steps: str, geometry: str, overview: str, annotation: str, **data: Any) -> None:
+    #     super().__init__(**data)
+    #     self.profile = profile
+    #     self.coordinates = coordinates
+    #     self.alternatives = alternatives
+    #     self.steps = steps
+    #     self.geometry = geometry
+    #     self.overview = overview
+    #     self.annotation = annotation
 
     class Config:
         schema_extra = {

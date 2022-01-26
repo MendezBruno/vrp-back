@@ -26,16 +26,15 @@ base_url = "http://router.project-osrm.org/"
 # print(r.json())
 
 
-def orsm_route_service(coordinates: str, profile: str, alternative: str, step: str, geometry: str, overview: str,
-                       annotation: str):
-    algo = OrsmRequest(coordinates=coordinates)
+def orsm_route_service(orsmRequest: OrsmRequest):
+    algo = orsmRequest
+    coordinates = ";".join(algo.coordinates)
     route_service_url = "route/v1/{profile}/{coordinates}?alternatives={alternatives}&steps={steps}&geometries={geometries}&overview={overview}&annotations={annotations}".format(
         profile=algo.profile,
-        coordinates=algo.coordinates,
+        coordinates=coordinates,
         alternatives=algo.alternatives,
         steps=algo.steps,
         geometries=algo.geometry,
         overview=algo.overview,
         annotations=algo.annotation)
-    result = requests.get(base_url + route_service_url)
-    return result.json()
+    return requests.get(base_url + route_service_url)

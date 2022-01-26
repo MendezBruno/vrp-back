@@ -38,15 +38,16 @@ class Route(BaseModel):
     weight: float = Field(None, title='The calculated weight of the route.')
     distance: float = Field(None, title='The distance traveled by the route, in float meters.')
     duration: float = Field(None, title='The estimated travel time, in float number of seconds.')
+    geometry: any = Field(None, title='The whole geometry of the route value depending on')
 
-    def __init__(self, legs: List[Leg], weight_name: str, weight: float, distance: float, duration: float,
-                 **data: Any) -> None:
-        super().__init__(**data)
-        self.legs = legs
-        self.weight_name = weight_name
-        self.weight = weight
-        self.distance = distance
-        self.duration = duration
+    # def __init__(self, legs: List[Leg], weight_name: str, weight: float, distance: float, duration: float,
+    #              **data: Any) -> None:
+    #     super().__init__(**data)
+    #     self.legs = legs
+    #     self.weight_name = weight_name
+    #     self.weight = weight
+    #     self.distance = distance
+    #     self.duration = duration
 
     class Config:
         schema_extra = {
