@@ -14,13 +14,26 @@ class RouteRequest(BaseModel):
                 "paquerId": 123,
                 "packages": [{
                     "id": 1,
-                    "location": [-34.7228847459182, -58.27611923217773],
+                    "location": [-58.27611923217773, -34.7228847459182],
                     "address": "calle San juan 353, Quilmes",
                     "packages": 12345
                 },
                     {
-                        "id": 1,
-                        "location": [-34.6337596447102, -58.4255075454712],
+                    "id": 3,
+                    "location": [-58.39488744735717,-34.63010048072745],
+                    "address": "Av. Brasil",
+                    "packages": 12348
+                },
+                    {
+                        "id": 2,
+                        "location": [-58.35366725921631,-34.66494647089104],
+                        "address": "Av. Roca, Avellaneda",
+                        "packages": 12347
+                    },
+
+                    {
+                        "id": 4,
+                        "location": [-58.4255075454712, -34.6337596447102],
                         "address": "calle Santander",
                         "packages": 12346
                     }]
@@ -31,7 +44,7 @@ class RouteRequest(BaseModel):
 class RouteSchema(BaseModel):
     id: int = Field(None, title='Id for Route')
     paquerId: int = Field(0, title='Id for Paquer')
-    geojson: List[int] = Field([], title='geojson contains route package\'s')
+    geojson: dict = Field([], title='geojson contains route package\'s')
     packages: List[Package] = Field([], title='package array')
 
     # def __init__(self, id: int, paquer_id: int, geojson: List[int], packages: List[Package], **data: Any) -> None:

@@ -1,6 +1,6 @@
 import requests
 
-from src.api.orsm.schemas.OrsmRequest import OrsmRequest
+from src.api.orsm.schemas.OrsmRequest import OrsmRequest, OrsmTripRequest
 
 base_url = "http://router.project-osrm.org/"
 
@@ -38,3 +38,14 @@ def orsm_route_service(orsm_request: OrsmRequest):
         overview=algo.overview,
         annotations=algo.annotation)
     return requests.get(base_url + route_service_url)
+
+
+def orsm_trip_service(orsm_trip_request: OrsmTripRequest):
+    coordinates = ";".join(orsm_trip_request.coordinates)
+    trip_service_url = 'trip/v1/{profile}/{coordinates}?source={first}&destination={last}&geometries=geojson'.format(
+        profile=orsm_trip_request.profile,
+        coordinates=coordinates,
+        first=orsm_trip_request.first,
+        last=orsm_trip_request.last,
+        geometries=orsm_trip_request.geometry)
+    return requests.get(base_url + trip_service_url)
