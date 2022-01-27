@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 
-from src.api.ORSM.routes.router import orsm_router
+from src.api.orsm.routes.router import orsm_router
 from src.core.routes.router import jobs_router
 
 app = FastAPI()

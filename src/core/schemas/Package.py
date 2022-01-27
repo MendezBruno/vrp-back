@@ -1,11 +1,13 @@
+from typing import List
+
 from pydantic import BaseModel, Field
 
 
 class Package(BaseModel):
     id: int = Field(None, title='Id package')
-    location: [] = Field([], title='lng and lat of deliver')
+    location: List[float] = Field([], title='lng and lat of deliver')
     address: str = Field("", title='address to deliver package')
-    codePackage: int = Field(..., title='package array')
+    codePackage: int = Field(None, title='package code')
 
     class Config:
         schema_extra = {

@@ -6,26 +6,27 @@ from src.core.schemas.Package import Package
 
 class RouteRequest(BaseModel):
     paquerId: int = Field(..., title='Id for Paquer')
-    packages: List[Package] = Field([], title='package array')
+    packages: List[Package] = Field(..., title='package array')
 
     class Config:
         schema_extra = {
             "example": {
-                "paquerId": 12345,
+                "paquerId": 123,
                 "packages": [{
                     "id": 1,
-                    "location": [34.0, 54.0],
+                    "location": [-34.7228847459182, -58.27611923217773],
                     "address": "calle San juan 353, Quilmes",
                     "packages": 12345
                 },
                     {
                         "id": 1,
-                        "location": [34.0, 54.0],
-                        "address": "calle San juan 353, Quilmes",
-                        "packages": 12345
+                        "location": [-34.6337596447102, -58.4255075454712],
+                        "address": "calle Santander",
+                        "packages": 12346
                     }]
             }
         }
+
 
 class RouteSchema(BaseModel):
     id: int = Field(None, title='Id for Route')

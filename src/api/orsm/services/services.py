@@ -1,6 +1,6 @@
 import requests
 
-from src.api.ORSM.schemas.OrsmRequest import OrsmRequest
+from src.api.orsm.schemas.OrsmRequest import OrsmRequest
 
 base_url = "http://router.project-osrm.org/"
 
@@ -26,8 +26,8 @@ base_url = "http://router.project-osrm.org/"
 # print(r.json())
 
 
-def orsm_route_service(orsmRequest: OrsmRequest):
-    algo = orsmRequest
+def orsm_route_service(orsm_request: OrsmRequest):
+    algo = orsm_request
     coordinates = ";".join(algo.coordinates)
     route_service_url = "route/v1/{profile}/{coordinates}?alternatives={alternatives}&steps={steps}&geometries={geometries}&overview={overview}&annotations={annotations}".format(
         profile=algo.profile,
