@@ -76,16 +76,10 @@ class OrsmRoute(BaseModel):
 
 class Waypoint(BaseModel):
     hint: str
-    distance: float
-    location: List[float]
-    name: str
-
-    # def __init__(self, hint: str, distance: float, location: List[float], name: str, **data: Any) -> None:
-    #     super().__init__(**data)
-    #     self.hint = hint
-    #     self.distance = distance
-    #     self.location = location
-    #     self.name = name
+    waypoint_index: int = Field(0, description="Index of the point in the trip.")
+    distance: float = Field(0, description="The distance, in metres, from the input coordinate to the snapped coordinate")
+    location: List[float] = Field("", description="Float with la lat and lng")
+    name: str = Field("", description="Name from street")
 
 
 class OrsmRouteServiceResponseSchema(BaseModel):

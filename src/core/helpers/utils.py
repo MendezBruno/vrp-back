@@ -1,8 +1,5 @@
 from typing import List
-
-# from src.api.orsm.schemas.OrsmSchema.py import Route
-# from src.api.orsm.schemas.OrsmSchema.py import OrsmRoute
-from src.api.orsm.schemas.OrsmSchema import OrsmRoute
+from src.api.orsm.schemas.OrsmSchema import OrsmRoute, Waypoint
 from src.core.schemas.Package import Package
 
 decimal_coord_float = 2
@@ -35,6 +32,26 @@ def coordinates_to_packages(origin_packages: List[Package], param: OrsmRoute):
     for package in origin_packages:
         aux_coord = func_action(package.location)
         aux_result.append((package, coord_geojson.index(aux_coord)))
+    aux_result = sorted(aux_result, key=lambda p: float(p[1]))
+    for item, indice in aux_result:
+        result.append(item)
+    return result
+
+
+def find_waypoint(package: Package, param: List[Waypoint]):
+    package_coord = func_action(package.location)
+    for waypoint in param:
+        waypoint_coord = func_action(waypoint.location)
+        if set(package_coord) == set(waypoint_coord):
+            return waypoint
+
+
+def waypoints_to_packages(origin_packages: List[Package], param: List[Waypoint]):
+    result = []
+    aux_result = []
+    for package in origin_packages:
+        waypoint = find_waypoint(package, param)
+        aux_result.append((package, waypoint.waypoint_index))
     aux_result = sorted(aux_result, key=lambda p: float(p[1]))
     for item, indice in aux_result:
         result.append(item)
